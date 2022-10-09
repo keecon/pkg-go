@@ -1,0 +1,61 @@
+name: build
+
+on:
+  push:
+    branches:
+    - main
+    paths-ignore:
+    - 'tools/**'
+    - '**.md'
+  pull_request:
+    branches:
+    - main
+    paths-ignore:
+    - 'tools/**'
+    - '**.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: [1.18, 1.19]
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v3
+      with:
+        go-version: ${{ matrix.go }}
+
+    - uses: actions/cache@v3
+      with:
+        path: |
+          ~/go/pkg/mod
+          ~/go/bin
+          ~/.cache/go-build
+        key: ${{ runner.os }}-go-${{ matrix.go }}-${{ hashFiles('**/go.sum') }}
+        restore-keys: ${{ runner.os }}-go-${{ matrix.go }}
+
+    - uses: golangci/golangci-lint-action@v3
+
+    - name: check tools
+      id: check_tools
+      uses: andstor/file-existence-action@v1.1.0
+      with:
+        files: '/home/runner/go/bin/mage, /home/runner/go/bin/tparse'
+
+    - name: setup tools
+      if: steps.check_tools.outputs.files_exists != 'true'
+      run: |
+        go install github.com/magefile/mage
+        go install github.com/mfridman/tparse
+
+    - name: test
+      run: mage test
+
+    - uses: codecov/codecov-action@v3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./codecov.out
+        flags: tests
+        name: main-tests
