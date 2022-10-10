@@ -1,4 +1,4 @@
-module github.com/keecon/pkg
+module github.com/keecon/pkg-go
 
 go 1.19
 
