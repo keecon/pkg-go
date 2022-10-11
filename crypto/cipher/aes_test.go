@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package aes
+package cipher
 
 import (
 	"crypto/rand"
@@ -39,7 +39,7 @@ func TestAES256(t *testing.T) {
 			// given
 			secret := newRandHex(t, v.secretLen/2)
 			plaintext := newRandBytes(t, 128)
-			c := NewAES(secret, WithSHA256())
+			c := NewAES(secret, WithAES256())
 
 			// when
 			salt := c.NewInt64Salt(time.Now().Unix())
@@ -92,7 +92,7 @@ func TestAES256Options(t *testing.T) {
 			secret := newRandHex(t, v.secretLen/2)
 			plaintext := newRandBytes(t, 128)
 			c := NewAES(secret,
-				WithSHA256(),
+				WithAES256(),
 				WithNonceLength(v.nonceLen),
 				WithHKDFHash(v.hkdfHash),
 				WithHKDFInfo(v.hkdfInfo),
@@ -134,7 +134,7 @@ func TestAES192(t *testing.T) {
 			// given
 			secret := newRandHex(t, v.secretLen/2)
 			plaintext := newRandBytes(t, 128)
-			c := NewAES(secret, WithSHA192())
+			c := NewAES(secret, WithAES192())
 
 			// when
 			salt := c.NewInt64Salt(time.Now().Unix())
@@ -187,7 +187,7 @@ func TestAES192Options(t *testing.T) {
 			secret := newRandHex(t, v.secretLen/2)
 			plaintext := newRandBytes(t, 128)
 			c := NewAES(secret,
-				WithSHA192(),
+				WithAES192(),
 				WithNonceLength(v.nonceLen),
 				WithHKDFHash(v.hkdfHash),
 				WithHKDFInfo(v.hkdfInfo),
@@ -229,7 +229,7 @@ func TestAES128(t *testing.T) {
 			// given
 			secret := newRandHex(t, v.secretLen/2)
 			plaintext := newRandBytes(t, 256)
-			c := NewAES(secret, WithSHA128())
+			c := NewAES(secret, WithAES128())
 
 			// when
 			salt := c.NewInt64Salt(time.Now().Unix())
@@ -282,7 +282,7 @@ func TestAES128Options(t *testing.T) {
 			secret := newRandHex(t, v.secretLen/2)
 			plaintext := newRandBytes(t, 256)
 			c := NewAES(secret,
-				WithSHA128(),
+				WithAES128(),
 				WithNonceLength(v.nonceLen),
 				WithHKDFHash(v.hkdfHash),
 				WithHKDFInfo(v.hkdfInfo),

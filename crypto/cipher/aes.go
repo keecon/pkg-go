@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package aes implements AES encryption with GCM, KDF Hash
-package aes
+// Package cipher implements AES encryption with GCM, KDF Hash
+package cipher
 
 import (
 	"crypto/aes"
@@ -45,24 +45,24 @@ func NewAES(secret string, opts ...Option) *AES {
 	return ret
 }
 
-// WithSHA256 SHA 256 알고리즘 선택
-func WithSHA256() Option {
+// WithAES256 AES 256 알고리즘 선택 (Default)
+func WithAES256() Option {
 	return func(c *AES) {
 		c.alg = "AES256"
 		c.algKeyLen = 32
 	}
 }
 
-// WithSHA192 SHA 192 알고리즘 선택
-func WithSHA192() Option {
+// WithAES192 AES 192 알고리즘 선택
+func WithAES192() Option {
 	return func(c *AES) {
 		c.alg = "AES192"
 		c.algKeyLen = 24
 	}
 }
 
-// WithSHA128 SHA 128 알고리즘 선택
-func WithSHA128() Option {
+// WithAES128 AES 128 알고리즘 선택
+func WithAES128() Option {
 	return func(c *AES) {
 		c.alg = "AES128"
 		c.algKeyLen = 16
