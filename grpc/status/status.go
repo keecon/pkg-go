@@ -83,6 +83,11 @@ func AlreadyExists(format string, a ...any) *Status {
 	return Newf(codes.AlreadyExists, format, a...)
 }
 
+// PermissionDenied returns a Status PermissionDenied
+func PermissionDenied(format string, a ...any) *Status {
+	return Newf(codes.PermissionDenied, format, a...)
+}
+
 // FailedPrecondition returns a Status FailedPrecondition
 func FailedPrecondition(format string, a ...any) *Status {
 	return Newf(codes.FailedPrecondition, format, a...)
@@ -96,6 +101,11 @@ func Aborted(format string, a ...any) *Status {
 // ResourceExhausted returns a Status ResourceExhausted
 func ResourceExhausted(format string, a ...any) *Status {
 	return Newf(codes.ResourceExhausted, format, a...)
+}
+
+// Unauthenticated returns a Status Unauthenticated
+func Unauthenticated(format string, a ...any) *Status {
+	return Newf(codes.Unauthenticated, format, a...)
 }
 
 // OutOfRange returns a Status OutOfRange
