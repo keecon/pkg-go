@@ -16,7 +16,7 @@ import (
 	"golang.org/x/crypto/hkdf"
 )
 
-// AES 암/복호화 (GCM 모드)
+// AES implements encrypt/decrypt AES algorithm (GCM)
 type AES struct {
 	secret    string
 	alg       string
@@ -26,10 +26,10 @@ type AES struct {
 	hkdfInfo  []byte
 }
 
-// Option AES 함/복호화 설정
+// Option defines configure AES settings
 type Option func(*AES)
 
-// NewAES 암/복호화 개체 생성
+// NewAES creates AES
 func NewAES(secret string, opts ...Option) *AES {
 	ret := &AES{
 		secret:    secret,
@@ -45,7 +45,7 @@ func NewAES(secret string, opts ...Option) *AES {
 	return ret
 }
 
-// WithAES256 AES 256 알고리즘 선택 (Default)
+// WithAES256 configures AES256 algorithm
 func WithAES256() Option {
 	return func(c *AES) {
 		c.alg = "AES256"
@@ -53,7 +53,7 @@ func WithAES256() Option {
 	}
 }
 
-// WithAES192 AES 192 알고리즘 선택
+// WithAES192 configures AES192 algorithm
 func WithAES192() Option {
 	return func(c *AES) {
 		c.alg = "AES192"
@@ -61,7 +61,7 @@ func WithAES192() Option {
 	}
 }
 
-// WithAES128 AES 128 알고리즘 선택
+// WithAES128 configures AES128 algorithm
 func WithAES128() Option {
 	return func(c *AES) {
 		c.alg = "AES128"
@@ -69,35 +69,42 @@ func WithAES128() Option {
 	}
 }
 
-// WithNonceLength nonce length 설정
+// WithNonceLength configures nonce length
 func WithNonceLength(n int) Option {
 	return func(c *AES) {
 		c.nonceLen = n
 	}
 }
 
-// WithHKDFHash KDF Hash 함수 설정
+// WithHKDFHash configures Key Derivation Function (HKDF)
 func WithHKDFHash(fn func() hash.Hash) Option {
 	return func(c *AES) {
 		c.hkdfHash = fn
 	}
 }
 
-// WithHKDFInfo KDF 추가 정보 설정
+// WithHKDFInfo configures Key Derivation Function (HKDF) info
 func WithHKDFInfo(info []byte) Option {
 	return func(c *AES) {
 		c.hkdfInfo = info
 	}
 }
 
-// NewInt64Salt int64 to []byte
+// NewInt64Salt returns bytes for using salt
 func (c *AES) NewInt64Salt(data int64) []byte {
 	salt := make([]byte, 8)
 	binary.LittleEndian.PutUint64(salt, uint64(data))
 	return salt
 }
 
-// Encrypt 암호화
+// NewInt32Salt returns bytes for using salt
+func (c *AES) NewInt32Salt(data int32) []byte {
+	salt := make([]byte, 8)
+	binary.LittleEndian.PutUint32(salt, uint32(data))
+	return salt
+}
+
+// Encrypt implements encrypt and authenticates plaintext
 func (c *AES) Encrypt(plaintext, salt []byte) ([]byte, error) {
 	key, nonce, err := c.newKeyNonce(salt)
 	if err != nil {
@@ -112,7 +119,7 @@ func (c *AES) Encrypt(plaintext, salt []byte) ([]byte, error) {
 	return aead.Seal(nil, nonce, plaintext, nil), nil
 }
 
-// Decrypt 복호화
+// Decrypt implements decrypt and authenticates ciphertext
 func (c *AES) Decrypt(ciphertext, salt []byte) ([]byte, error) {
 	key, nonce, err := c.newKeyNonce(salt)
 	if err != nil {
