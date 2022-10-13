@@ -9,7 +9,9 @@
 [![License](https://img.shields.io/github/license/keecon/pkg-go)](https://github.com/keecon/pkg-go/blob/main/LICENSE)
 
 This project is currently in development.
-The API should be considered unstable and likely to change. It supports:
+The API should be considered unstable and likely to change.
+
+It supports:
 
 - The [two most recent major releases][go-support-policy] of Go.
 - [APIv2] of Protocol Buffers in Go (`google.golang.org/protobuf`).
