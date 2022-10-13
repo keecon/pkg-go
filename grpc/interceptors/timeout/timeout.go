@@ -9,12 +9,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/timeout"
 	"google.golang.org/grpc"
 )
-
-// UnaryClientInterceptor returns a new unary client interceptor that returns a grpc error from context error.
-var UnaryClientInterceptor = timeout.TimeoutUnaryClientInterceptor
 
 // UnaryServerInterceptor returns a new unary server interceptor that returns a grpc error from context error.
 func UnaryServerInterceptor(timeout time.Duration) grpc.UnaryServerInterceptor {
