@@ -24,7 +24,7 @@ func UnaryServerInterceptor() []grpc.UnaryServerInterceptor {
 			if srv, ok := info.Server.(ServiceAuthFunc); ok {
 				if newCtx, session, err := srv.AuthFunc(ctx, info.FullMethod); err != nil {
 					ctx = newErrContext(newCtx, err)
-				} else {
+				} else if session != nil {
 					ctx = newSessionContext(newCtx, session)
 				}
 			}
@@ -46,7 +46,7 @@ func StreamServerInterceptor() []grpc.StreamServerInterceptor {
 			if srv, ok := srv.(ServiceAuthFunc); ok {
 				if newCtx, session, err := srv.AuthFunc(ctx, info.FullMethod); err != nil {
 					ctx = newErrContext(newCtx, err)
-				} else {
+				} else if session != nil {
 					ctx = newSessionContext(newCtx, session)
 				}
 			}
