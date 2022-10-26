@@ -14,7 +14,7 @@ import (
 
 // ServiceAuthFunc performs authentication per service.
 type ServiceAuthFunc interface {
-	AuthFunc(ctx context.Context, fullMethodName string) (context.Context, any, error)
+	AuthFunc(ctx context.Context, fullMethodName string) (context.Context, error)
 }
 
 // UnaryServerInterceptor returns a new unary server interceptors that performs per-request auth.
@@ -22,10 +22,8 @@ func UnaryServerInterceptor() []grpc.UnaryServerInterceptor {
 	return []grpc.UnaryServerInterceptor{
 		func(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 			if srv, ok := info.Server.(ServiceAuthFunc); ok {
-				if newCtx, session, err := srv.AuthFunc(ctx, info.FullMethod); err != nil {
+				if newCtx, err := srv.AuthFunc(ctx, info.FullMethod); err != nil {
 					ctx = newErrContext(newCtx, err)
-				} else if session != nil {
-					ctx = newSessionContext(newCtx, session)
 				}
 			}
 			return handler(ctx, req)
@@ -44,10 +42,8 @@ func StreamServerInterceptor() []grpc.StreamServerInterceptor {
 		func(srv any, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 			ctx := stream.Context()
 			if srv, ok := srv.(ServiceAuthFunc); ok {
-				if newCtx, session, err := srv.AuthFunc(ctx, info.FullMethod); err != nil {
+				if newCtx, err := srv.AuthFunc(ctx, info.FullMethod); err != nil {
 					ctx = newErrContext(newCtx, err)
-				} else if session != nil {
-					ctx = newSessionContext(newCtx, session)
 				}
 			}
 			wrapped := middleware.WrapServerStream(stream)

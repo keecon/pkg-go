@@ -8,19 +8,7 @@ import (
 	"context"
 )
 
-type (
-	sessionCtxKey    struct{}
-	sessionErrCtxKey struct{}
-)
-
-// SessionFromContext returns authenticated session info.
-func SessionFromContext(ctx context.Context) any {
-	return ctx.Value(sessionCtxKey{})
-}
-
-func newSessionContext(ctx context.Context, session any) context.Context {
-	return context.WithValue(ctx, sessionCtxKey{}, session)
-}
+type sessionErrCtxKey struct{}
 
 func errFromContext(ctx context.Context) error {
 	v := ctx.Value(sessionErrCtxKey{})
