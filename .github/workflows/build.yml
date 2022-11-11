@@ -47,8 +47,8 @@ jobs:
     - name: setup tools
       if: steps.check_tools.outputs.files_exists != 'true'
       run: |
-        go install github.com/magefile/mage
-        go install github.com/mfridman/tparse
+        go install github.com/magefile/mage@latest
+        go install github.com/mfridman/tparse@latest
 
     - name: test
       run: mage test
