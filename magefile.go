@@ -13,8 +13,6 @@ import (
 	"github.com/magefile/mage/sh"
 )
 
-var goCmd = mg.GoCmd()
-
 // Run lint
 func Lint() error {
 	return sh.RunV("golangci-lint", "run")
@@ -25,7 +23,7 @@ func Test() error {
 	mg.Deps(Lint)
 
 	return script.ExecStdout(
-		goCmd+" test ./... -race -cover -json -coverprofile codecov.out -covermode atomic",
+		mg.GoCmd()+" test ./... -race -cover -json -coverprofile codecov.out -covermode atomic",
 		"tparse -all",
 	)
 }
