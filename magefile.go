@@ -3,16 +3,12 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"time"
 
 	"github.com/fatih/color"
-	"github.com/iwaltgen/magex/dep"
 	"github.com/iwaltgen/magex/git"
 	"github.com/iwaltgen/magex/script"
 	"github.com/iwaltgen/magex/semver"
-	"github.com/iwaltgen/magex/spinner"
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
 )
@@ -65,18 +61,4 @@ func Release(div string) error {
 		color.Green(nv)
 	}
 	return err
-}
-
-// Run install dependency tool
-func Setup() error {
-	defer spinner.Start(100 * time.Millisecond)()
-
-	pkgs, err := dep.GlobImport("tools/deps.go")
-	if err != nil {
-		return fmt.Errorf("loading package import: %w", err)
-	}
-
-	args := []string{"install"}
-	args = append(args, pkgs...)
-	return sh.RunV(goCmd, args...)
 }
