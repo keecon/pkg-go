@@ -14,14 +14,14 @@ import (
 	"google.golang.org/grpc/peer"
 )
 
-// UnaryServerInterceptor returns a new unary server interceptor that sets the values for request tags.
+// UnaryServerInterceptor returns a new unary server interceptor that sets the values for request peer info.
 func UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 		return handler(wrapPeerContext(ctx), req)
 	}
 }
 
-// StreamServerInterceptor returns a new streaming server interceptor that sets the values for request tags.
+// StreamServerInterceptor returns a new streaming server interceptor that sets the values for request peer info.
 func StreamServerInterceptor() grpc.StreamServerInterceptor {
 	return func(srv any, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		nss := middleware.WrapServerStream(stream)

@@ -7,6 +7,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.3
 	github.com/iwaltgen/magex v0.7.4
 	github.com/magefile/mage v1.14.0
+	github.com/rs/xid v1.4.0
 	github.com/stretchr/testify v1.8.1
 	golang.org/x/crypto v0.1.0
 	google.golang.org/genproto v0.0.0-20220519153652-3a47de7e79bd
