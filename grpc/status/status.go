@@ -6,10 +6,6 @@
 package status
 
 import (
-	"fmt"
-	"strings"
-
-	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -58,19 +54,24 @@ var (
 	FromContextError = status.FromContextError
 )
 
-// IsNotFound return true if Status.Code equals codes.NotFound, else false
-func IsNotFound(err error) bool {
-	return Code(err) == codes.NotFound
-}
-
 // OK returns a Status Ok
 func OK() *Status {
 	return New(codes.OK, "")
 }
 
+// Canceled returns a Status Canceled
+func Canceled(format string, a ...any) *Status {
+	return Newf(codes.Canceled, format, a...)
+}
+
 // InvalidArgument returns a Status InvalidArgument
 func InvalidArgument(format string, a ...any) *Status {
 	return Newf(codes.InvalidArgument, format, a...)
+}
+
+// DeadlineExceeded returns a Status DeadlineExceeded
+func DeadlineExceeded(format string, a ...any) *Status {
+	return Newf(codes.DeadlineExceeded, format, a...)
 }
 
 // NotFound returns a Status NotFound
@@ -118,60 +119,22 @@ func Internal(format string, a ...any) *Status {
 	return Newf(codes.Internal, format, a...)
 }
 
+// Unknown returns a Status Unknown
+func Unknown(format string, a ...any) *Status {
+	return Newf(codes.Unknown, format, a...)
+}
+
 // Unimplemented returns a Status Unimplemented
 func Unimplemented(format string, a ...any) *Status {
 	return Newf(codes.Unimplemented, format, a...)
 }
 
-type (
-	// RetryInfo describes when the clients can retry a failed request.
-	RetryInfo = errdetails.RetryInfo
+// Unavailable returns a Status Unavailable
+func Unavailable(format string, a ...any) *Status {
+	return Newf(codes.Unavailable, format, a...)
+}
 
-	// DebugInfo describes additional debugging info.
-	DebugInfo = errdetails.DebugInfo
-
-	// QuotaFailure describes how a quota check failed.
-	QuotaFailure = errdetails.QuotaFailure
-
-	// ErrorInfo describes the cause of the error with structured details.
-	ErrorInfo = errdetails.ErrorInfo
-
-	// PreconditionFailure describes what preconditions have failed.
-	PreconditionFailure = errdetails.PreconditionFailure
-
-	// BadRequest describes violations in a client request.
-	BadRequest = errdetails.BadRequest
-
-	// RequestInfo contains metadata about the request that clients can attach when filing a bug
-	// or providing other forms of feedback.
-	RequestInfo = errdetails.RequestInfo
-
-	// ResourceInfo describes the resource that is being accessed.
-	ResourceInfo = errdetails.ResourceInfo
-
-	// Help provides links to documentation or for performing an out of band action.
-	Help = errdetails.Help
-
-	// LocalizedMessage provides a localized error message that is safe to return to the user
-	// which can be attached to an RPC error.
-	LocalizedMessage = errdetails.LocalizedMessage
-)
-
-// ErrorDetailString returns err.Error() with details message if err is Status
-func ErrorDetailString(err error) string {
-	if err == nil {
-		return ""
-	}
-
-	if s, ok := FromError(err); ok {
-		var details []string
-		for _, v := range s.Details() {
-			details = append(details, fmt.Sprintf("{%v}", v))
-		}
-
-		if 0 < len(details) {
-			return fmt.Sprintf("%s [%s]", err, strings.Join(details, ","))
-		}
-	}
-	return err.Error()
+// DataLoss returns a Status DataLoss
+func DataLoss(format string, a ...any) *Status {
+	return Newf(codes.DataLoss, format, a...)
 }

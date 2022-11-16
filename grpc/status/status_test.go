@@ -15,33 +15,55 @@ import (
 
 func TestCheckNotFound(t *testing.T) {
 	// dataset
-	dataset := []struct {
-		err error
-		ok  bool
-	}{
-		{NotFound("NotFound").Err(), true},
-		{OK().Err(), false},
-		{InvalidArgument("InvalidArgument").Err(), false},
-		{AlreadyExists("AlreadyExists").Err(), false},
-		{Aborted("Aborted").Err(), false},
-		{FailedPrecondition("FailedPrecondition").Err(), false},
-		{ResourceExhausted("ResourceExhausted").Err(), false},
-		{Internal("Internal").Err(), false},
-		{Unimplemented("unimplemented").Err(), false},
+	allErrors := []*Status{
+		OK(),
+		Canceled(codes.Canceled.String()),
+		InvalidArgument(codes.InvalidArgument.String()),
+		DeadlineExceeded(codes.DeadlineExceeded.String()),
+		NotFound(codes.NotFound.String()),
+		AlreadyExists(codes.AlreadyExists.String()),
+		PermissionDenied(codes.PermissionDenied.String()),
+		FailedPrecondition(codes.FailedPrecondition.String()),
+		Aborted(codes.Aborted.String()),
+		ResourceExhausted(codes.ResourceExhausted.String()),
+		Unauthenticated(codes.Unauthenticated.String()),
+		OutOfRange(codes.OutOfRange.String()),
+		Internal(codes.Internal.String()),
+		Unknown(codes.Unknown.String()),
+		Unimplemented(codes.Unimplemented.String()),
+		Unavailable(codes.Unavailable.String()),
+		DataLoss(codes.DataLoss.String()),
+	}
+	allCheckers := []func(error) bool{
+		IsOK,
+		IsCanceled,
+		IsInvalidArgument,
+		IsDeadlineExceeded,
+		IsNotFound,
+		IsAlreadyExists,
+		IsPermissionDenied,
+		IsFailedPrecondition,
+		IsAborted,
+		IsResourceExhausted,
+		IsUnauthenticated,
+		IsOutOfRange,
+		IsInternal,
+		IsUnknown,
+		IsUnimplemented,
+		IsUnavailable,
+		IsDataLoss,
 	}
 
 	// table driven tests
-	for _, v := range dataset {
-		// given
-		err := v.err
-		expected := v.ok
+	for _, checker := range allCheckers {
+		var checkCount int
+		for _, err := range allErrors {
+			if checker(err.Err()) {
+				checkCount++
+			}
+		}
 
-		// when
-		ok := IsNotFound(err)
-
-		// then
-		assert.Equal(t, expected, ok)
-
+		assert.Equal(t, 1, checkCount)
 	}
 }
 
