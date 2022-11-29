@@ -9,7 +9,7 @@ require (
 	github.com/magefile/mage v1.14.0
 	github.com/rs/xid v1.4.0
 	github.com/stretchr/testify v1.8.1
-	golang.org/x/crypto v0.2.0
+	golang.org/x/crypto v0.3.0
 	google.golang.org/genproto v0.0.0-20220519153652-3a47de7e79bd
 	google.golang.org/grpc v1.50.1
 )
