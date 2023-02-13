@@ -45,3 +45,6 @@ Temporary Items
 # direnv
 .envrc
 .direnv
+
+# asdf
+.tool-version
