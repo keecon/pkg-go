@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/fatih/color v1.14.1
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.3
-	github.com/iwaltgen/magex v0.8.4
+	github.com/iwaltgen/magex v0.8.5
 	github.com/magefile/mage v1.14.0
 	github.com/rs/xid v1.4.0
 	github.com/stretchr/testify v1.8.1
@@ -25,8 +25,8 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
-	github.com/go-git/go-billy/v5 v5.3.1 // indirect
-	github.com/go-git/go-git/v5 v5.5.1 // indirect
+	github.com/go-git/go-billy/v5 v5.4.0 // indirect
+	github.com/go-git/go-git/v5 v5.5.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/itchyny/gojq v0.12.7 // indirect
