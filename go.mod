@@ -10,8 +10,8 @@ require (
 	github.com/rs/xid v1.4.0
 	github.com/stretchr/testify v1.8.1
 	golang.org/x/crypto v0.6.0
-	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6
-	google.golang.org/grpc v1.52.3
+	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f
+	google.golang.org/grpc v1.53.0
 )
 
 require (
