@@ -6,7 +6,7 @@ require (
 	github.com/fatih/color v1.15.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.5
 	github.com/iwaltgen/magex v0.8.5
-	github.com/magefile/mage v1.14.0
+	github.com/magefile/mage v1.15.0
 	github.com/rs/xid v1.5.0
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/crypto v0.9.0
