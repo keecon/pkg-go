@@ -8,7 +8,7 @@ require (
 	github.com/iwaltgen/magex v0.8.5
 	github.com/magefile/mage v1.15.0
 	github.com/rs/xid v1.5.0
-	github.com/stretchr/testify v1.8.3
+	github.com/stretchr/testify v1.8.4
 	golang.org/x/crypto v0.9.0
 	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
 	google.golang.org/grpc v1.55.0
