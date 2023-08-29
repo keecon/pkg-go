@@ -46,7 +46,7 @@ func fromContextError(err error) error {
 	if _, ok := err.(interface{ GRPCStatus() *status.Status }); ok {
 		return err
 	}
-	if etype, ok := err.(net.Error); ok && etype.Timeout() {
+	if netError, ok := err.(net.Error); ok && netError.Timeout() {
 		return status.New(codes.DeadlineExceeded, err.Error()).Err()
 	}
 	return status.New(codes.Unknown, err.Error()).Err()
