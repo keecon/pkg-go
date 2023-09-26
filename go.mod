@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/fatih/color v1.15.0
-	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0
+	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	github.com/iwaltgen/magex v0.9.0
 	github.com/magefile/mage v1.15.0
 	github.com/rs/xid v1.5.0
