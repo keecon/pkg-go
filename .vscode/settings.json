@@ -3,4 +3,14 @@
 	"licenser.license": "BSD3",
 	"licenser.disableAutoHeaderInsertion": false,
 	"licenser.disableAutoSave": false,
+	"cSpell.words": [
+		"codecov",
+		"covermode",
+		"coverprofile",
+		"errdetails",
+		"fatih",
+		"genproto",
+		"googleapis",
+		"tparse"
+	],
 }
