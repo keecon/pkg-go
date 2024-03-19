@@ -4,13 +4,13 @@ go 1.22.0
 
 require (
 	github.com/fatih/color v1.16.0
-	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
+	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.1.0
 	github.com/iwaltgen/magex v0.10.0
 	github.com/magefile/mage v1.15.0
 	github.com/rs/xid v1.5.0
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/crypto v0.21.0
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240213162025-012b6fc9bca9
 	google.golang.org/grpc v1.62.1
 )
 
