@@ -3,7 +3,7 @@ module github.com/keecon/pkg-go
 go 1.22.0
 
 require (
-	github.com/fatih/color v1.16.0
+	github.com/fatih/color v1.17.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.1.0
 	github.com/iwaltgen/magex v0.10.0
 	github.com/magefile/mage v1.15.0
