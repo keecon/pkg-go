@@ -10,8 +10,8 @@ require (
 	github.com/rs/xid v1.6.0
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/crypto v0.27.0
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117
-	google.golang.org/grpc v1.66.2
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240814211410-ddb44dafa142
+	google.golang.org/grpc v1.67.0
 )
 
 require (
@@ -45,7 +45,7 @@ require (
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
 	golang.org/x/tools v0.24.0 // indirect
-	google.golang.org/protobuf v1.34.1 // indirect
+	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	mvdan.cc/sh/v3 v3.7.0 // indirect
