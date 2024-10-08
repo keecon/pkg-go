@@ -11,7 +11,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/crypto v0.27.0
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240814211410-ddb44dafa142
-	google.golang.org/grpc v1.67.0
+	google.golang.org/grpc v1.67.1
 )
 
 require (
