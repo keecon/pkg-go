@@ -1,7 +1,8 @@
 module github.com/keecon/pkg-go
 
-go 1.22.0
-toolchain go1.22.9
+go 1.22.7
+
+toolchain go1.23.0
 
 require (
 	github.com/fatih/color v1.18.0
