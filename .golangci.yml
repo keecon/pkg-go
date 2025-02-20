@@ -1,6 +1,3 @@
 run:
   timeout: 10m
   tests: false
-issues:
-  exclude-dirs:
-  - tools

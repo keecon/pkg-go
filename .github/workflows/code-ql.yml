@@ -5,13 +5,11 @@ on:
     branches:
     - main
     paths-ignore:
-    - 'tools/**'
     - '**.md'
   pull_request:
     branches:
     - main
     paths-ignore:
-    - 'tools/**'
     - '**.md'
   schedule:
   - cron: '0 10 * * 0'

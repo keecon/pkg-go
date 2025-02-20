@@ -16,6 +16,15 @@ It supports:
 - The [two most recent major releases][go-support-policy] of Go.
 - [APIv2] of Protocol Buffers in Go (`google.golang.org/protobuf`).
 
+## development
+
+```bash
+go mod tidy
+go install tool
+
+mage test
+```
+
 [apiv2]: https://blog.golang.org/protobuf-apiv2
 [go-support-policy]: https://golang.org/doc/devel/release#policy
 [license]: https://github.com/keecon/pkg-go/blob/main/LICENSE
