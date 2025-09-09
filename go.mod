@@ -1,6 +1,6 @@
 module github.com/keecon/pkg-go
 
-go 1.25
+go 1.24
 
 require (
 	github.com/fatih/color v1.18.0
